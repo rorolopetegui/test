@@ -1,0 +1,19 @@
+name: "new-issue"
+on:
+  issues:
+    types: [opened, edited]
+jobs:
+  default-comment:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2.0.0 
+    - name: issue comment
+      id: issue_comment
+      uses: ./
+      with: 
+        repo-token: ${{ secrets.GITHUB_TOKEN}}
+        message: >
+          This is just a test comment
+    - name: log action output
+      if: contains(github.event.issue.labels.*.name, 'more information required') == false
+      run: echo ${{steps.run_action.outputs.message}}
