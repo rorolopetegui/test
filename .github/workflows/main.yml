@@ -13,6 +13,9 @@ jobs:
       with: 
         repo-token: ${{ secrets.GITHUB_TOKEN}}
         message: >
+          Check this ${{contains(github.event.issue.labels.*.name, 'more information required')}}
+          Check this 1 ${{github.event.issue.labels}}
+          Check this 2 ${{contains(github.event.issue.labels.*.name, 'more information required') == false}}
           This is just a test comment
     - name: log action output
       if: contains(github.event.issue.labels.*.name, 'more information required') == false
