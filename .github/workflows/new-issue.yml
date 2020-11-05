@@ -54,6 +54,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2.0.0 
     - name: issue comment
+      if: ${{contains(github.event.issue.labels.*.name, 'more information required')}}
       id: issue_comment
       uses: ./
       with: 
@@ -70,13 +71,13 @@ jobs:
           $OS_VERSION
           When you provide us this information we'll triage and reproduce the issue. 
     - name: log action output
-      if: ${{contains(github.event.issue.labels.*.name, 'more information required')}}
       run: echo ${{steps.run_action.outputs.message}}
   default-comment:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2.0.0 
     - name: issue comment
+      if: ${{contains(github.event.issue.labels.*.name, 'more information required') == false}}
       id: issue_comment
       uses: ./
       with: 
@@ -86,5 +87,4 @@ jobs:
           Remember, however, that GitHub isn't a mechanism for receiving support under any agreement or SLA. 
           If you require immediate assistance, contact Salesforce Customer Support.
     - name: log action output
-      if: ${{contains(github.event.issue.labels.*.name, 'more information required') == false}}
       run: echo ${{steps.run_action.outputs.message}}
