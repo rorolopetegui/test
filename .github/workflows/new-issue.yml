@@ -54,7 +54,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2.0.0 
     - name: issue comment
-      if: ${{contains(github.event.issue.labels.*.name, 'more information required')}}
+      #if: ${{contains(github.event.issue.labels.*.name, 'more information required')}}
       id: issue_comment
       uses: ./
       with: 
