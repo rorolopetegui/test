@@ -62,13 +62,6 @@ jobs:
         label: 'more information required'
         message: >
           This issue is missing the following required information: 
-          $STEPS_REPRODUCE
-          $LINK_TO_GITHUB
-          $EXPECTED_RESULT
-          $ACTUAL_RESULT
-          $CLI_VERSION
-          $PLUGIN_VERSION
-          $OS_VERSION
           When you provide us this information we'll triage and reproduce the issue. 
     - name: log action output
       run: echo ${{steps.run_action.outputs.message}}
