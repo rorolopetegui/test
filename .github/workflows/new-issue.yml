@@ -61,7 +61,9 @@ jobs:
         repo-token: ${{ secrets.GITHUB_TOKEN}}
         message: >
           ===============================
-          Check THIS ${{github.jobs.missed-info.steps.env.STEPS_REPRODUCE}}
+          Check this ${{env}}
+          Check this1 ${{process}}
+          Check this2 ${{process.env}}
           ===============================
     - name: log action output
       run: echo ${{steps.run_action.outputs.message}}
