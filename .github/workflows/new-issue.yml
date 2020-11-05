@@ -61,6 +61,7 @@ jobs:
             ===============================
             Check this ${{env}}
             Check this1 ${{env.STEPS_REPRODUCE}}
+            Check this2 ${{steps.env.STEPS_REPRODUCE}}
             ===============================
       - name: log action output
         run: echo ${{steps.run_action.outputs.message}}
