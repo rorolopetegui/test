@@ -18,5 +18,5 @@ jobs:
           Check this 2 ${{contains(github.event.issue.labels.*.name, 'more information required') == false}}
           This is just a test comment
     - name: log action output
-      if: contains(github.event.issue.labels.*.name, 'more information required') == false
+      if: ${{contains(github.event.issue.labels.*.name, 'more information required') == false}}
       run: echo ${{steps.run_action.outputs.message}}
