@@ -13,6 +13,7 @@ jobs:
         enable-versioned-regex: 0
   missed-info:
     runs-on: ubuntu-latest
+    needs: [triage]
     steps:
       - name: Missed Steps to reproduce
         if: ${{contains(github.event.issue.body, 'Steps to reproduce') == false}}
@@ -49,24 +50,22 @@ jobs:
         env:
           OS_VERSION: OS version
         run: echo "$OS_VERSION"
-  more-info-required:
-    runs-on: ubuntu-latest
-    needs: [triage]
-    steps:
-    - uses: actions/checkout@v2.0.0 
-    - name: issue comment
-      if: ${{contains(github.event.issue.labels.*.name, 'more information required') == true}}
-      id: issue_comment
-      uses: ./
-      with: 
-        repo-token: ${{ secrets.GITHUB_TOKEN}}
-        message: >
-          ===============================
-          Check this ${{env}}\n
-          Check this1 ${{env.STEPS_REPRODUCE}}\n
-          ===============================
-    - name: log action output
-      run: echo ${{steps.run_action.outputs.message}}
+      - uses: actions/checkout@v2.0.0 
+      - name: issue comment
+        if: ${{contains(github.event.issue.labels.*.name, 'more information required') == true}}
+        id: issue_comment
+        uses: ./
+        with: 
+          repo-token: ${{ secrets.GITHUB_TOKEN}}
+          message: >
+            ===============================
+            Check this ${{env}}
+            Check this ${{env.STEPS_REPRODUCE}}
+            Check this1 ${STEPS_REPRODUCE}
+            Check this2 ${{STEPS_REPRODUCE}}
+            ===============================
+      - name: log action output
+        run: echo ${{steps.run_action.outputs.message}}
   default-comment:
     runs-on: ubuntu-latest
     needs: [triage]
