@@ -60,8 +60,9 @@ jobs:
       with: 
         repo-token: ${{ secrets.GITHUB_TOKEN}}
         message: >
+          ===============================
           Check THIS ${{github.jobs.missed-info.steps.env.STEPS_REPRODUCE}}
-          Its TRUE
+          ===============================
     - name: log action output
       run: echo ${{steps.run_action.outputs.message}}
   default-comment:
