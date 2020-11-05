@@ -58,7 +58,7 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN}}
           message: >
             ===============================
-            Check this ${{env}}
+            Check this ${{json(env)}}
             Check this1 ${{env.STEPS_REPRODUCE}}
             Check this2 ${{steps.env.STEPS_REPRODUCE}}
             ===============================
