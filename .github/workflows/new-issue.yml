@@ -17,8 +17,19 @@ jobs:
     steps:
       - name: Missed Steps to reproduce
         env:
+          #if: ${{contains(github.event.issue.body, 'Steps to reproduce') == false}}
           STEPS_REPRODUCE: Steps to reproduce
-        run: echo "$STEPS_REPRODUCE"
+        if: ${{contains(github.event.issue.labels.*.name, 'more information required') == true}}
+        id: issue_comment
+        uses: ./
+        with: 
+          repo-token: ${{ secrets.GITHUB_TOKEN}}
+          message: >
+            ===============================
+            Check this ${{json(env)}}
+            Check this1 ${{env.STEPS_REPRODUCE}}
+            Check this2 ${{steps.env.STEPS_REPRODUCE}}
+            ===============================
       - name: Missed Link to a GitHub repository
         if: contains(github.event.issue.body, 'Link to a GitHub repository') == false
         env:
@@ -50,18 +61,6 @@ jobs:
           OS_VERSION: OS version
         run: echo "$OS_VERSION"
       - uses: actions/checkout@v2.0.0 
-      - name: issue comment
-        if: ${{contains(github.event.issue.labels.*.name, 'more information required') == true}}
-        id: issue_comment
-        uses: ./
-        with: 
-          repo-token: ${{ secrets.GITHUB_TOKEN}}
-          message: >
-            ===============================
-            Check this ${{json(env)}}
-            Check this1 ${{env.STEPS_REPRODUCE}}
-            Check this2 ${{steps.env.STEPS_REPRODUCE}}
-            ===============================
       - name: log action output
         run: echo ${{steps.run_action.outputs.message}}
   default-comment:
