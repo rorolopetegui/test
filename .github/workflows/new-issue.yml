@@ -15,7 +15,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Missed Steps to reproduce
-        if: contains(github.event.issue.body, 'Steps to reproduce') == false
+        if: ${{contains(github.event.issue.body, 'Steps to reproduce') == false}}
         env:
           STEPS_REPRODUCE: Steps to reproduce
         run: echo "$STEPS_REPRODUCE"
