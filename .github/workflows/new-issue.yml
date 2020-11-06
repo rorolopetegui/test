@@ -59,9 +59,7 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN}}
           message: >
             ==================================================
-            Check this1 ${{toJson(steps)}}
-            Check this2 ${{toJson(job)}}
-            Check this3 ${{toJson(env)}}
+            Check this1 ${{toJson(github)}}
             ==================================================
       - name: log action output
         run: echo ${{steps.run_action.outputs.message}}
