@@ -16,6 +16,7 @@ jobs:
     needs: [triage]
     outputs:
       test: ${{ steps.steps_to_reproduce.outputs.test }}
+      matrix: ${{ steps.link_to_github.outputs.matrix }}
     steps:
       - uses: actions/checkout@v2.0.0 
       - name: Missed Steps to reproduce
@@ -25,6 +26,7 @@ jobs:
           STEPS_REPRODUCE: Steps to reproduce
         run: echo "::set-output name=test::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
       - name: Missed Link to a GitHub repository
+        id: link_to_github
         if: contains(github.event.issue.body, 'Link to a GitHub repository') == false
         env:
           LINK_TO_GITHUB: Link to a GitHub repository
