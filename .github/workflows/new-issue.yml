@@ -15,22 +15,22 @@ jobs:
     runs-on: ubuntu-latest
     needs: [triage]
     outputs:
-      test: ${{ steps.steps_to_reproduce.outputs.test }}
-      matrix: ${{ steps.link_to_github.outputs.matrix }}
+      STEPS_REPRODUCE: ${{ steps.steps_to_reproduce.outputs.STEPS_REPRODUCE }}
+      LINK_TO_GITHUB: ${{ steps.steps_to_reproduce.outputs.LINK_TO_GITHUB }}
     steps:
       - uses: actions/checkout@v2.0.0 
       - name: Missed Steps to reproduce
         id: steps_to_reproduce
+        if: ${{contains(github.event.issue.body, 'Steps to reproduce') == false}}
         env:
-          #if: ${{contains(github.event.issue.body, 'Steps to reproduce') == false}}
           STEPS_REPRODUCE: Steps to reproduce
-        run: echo "::set-output name=test::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
+        run: echo "::set-output name=STEPS_REPRODUCE::$STEPS_REPRODUCE"
       - name: Missed Link to a GitHub repository
         id: link_to_github
-        if: contains(github.event.issue.body, 'Link to a GitHub repository') == true
+        if: contains(github.event.issue.body, 'Link to a GitHub repository') == false
         env:
           LINK_TO_GITHUB: Link to a GitHub repository
-        run: echo "::set-output name=matrix::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
+        run: echo "::set-output name=LINK_TO_GITHUB::LINK_TO_GITHUB"
       - name: Missed Expected result
         if: contains(github.event.issue.body, 'Expected result') == false
         env:
