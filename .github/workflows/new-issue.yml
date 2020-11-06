@@ -21,8 +21,7 @@ jobs:
           #if: ${{contains(github.event.issue.body, 'Steps to reproduce') == false}}
           STEPS_REPRODUCE: Steps to reproduce
         run: echo "$STEPS_REPRODUCE"
-      - name: Comment
-        if: ${{contains(github.event.issue.labels.*.name, 'more information required') == true}}
+      - name: issue comment
         id: issue_comment
         uses: ./
         with: 
@@ -38,6 +37,8 @@ jobs:
             Check this6 ${{steps.steps_to_reproduce.outputs}}
             Check this6 ${{steps.steps_to_reproduce.outputs.run}}
             ===============================
+      - name: log  action output
+        run: echo ${{steps.run_action.outputs.message}}
       - name: Missed Link to a GitHub repository
         if: contains(github.event.issue.body, 'Link to a GitHub repository') == false
         env:
