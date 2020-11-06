@@ -68,7 +68,8 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN}}
           message: >
             ==================================================
-            Check this ${{toJson(needs.missed-info)}}
+            Check this ${{toJson(needs.missed-info.outputs)}}
+            Check this1 ${{format('{{Hello {0} {1} {2}!}}', 'Mona', 'the', '')}}
             ==================================================
       - name: log action output
         run: echo ${{steps.run_action.outputs.message}}
