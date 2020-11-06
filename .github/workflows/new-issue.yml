@@ -26,7 +26,7 @@ jobs:
         if: contains(github.event.issue.body, 'Link to a GitHub repository') == false
         env:
           LINK_TO_GITHUB: Link to a GitHub repository
-        run: echo "$LINK_TO_GITHUB"
+        run: echo "::set-output name=matrix::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
       - name: Missed Expected result
         if: contains(github.event.issue.body, 'Expected result') == false
         env:
@@ -59,8 +59,8 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN}}
           message: >
             ==================================================
-            Check this1 ${{toJson(steps.steps_to_reproduce)}}
-            Check this2 ${{toJson(steps.steps_to_reproduce.outputs)}}
+            Check this1 ${{toJson(steps)}}
+            Check this2 ${{toJson(job)}}
             Check this3 ${{toJson(env)}}
             ==================================================
       - name: log action output
