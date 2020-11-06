@@ -15,23 +15,13 @@ jobs:
     runs-on: ubuntu-latest
     needs: [triage]
     steps:
+      - uses: actions/checkout@v2.0.0 
       - name: Missed Steps to reproduce
         id: steps_to_reproduce
         env:
           #if: ${{contains(github.event.issue.body, 'Steps to reproduce') == false}}
           STEPS_REPRODUCE: Steps to reproduce
         run: echo "$STEPS_REPRODUCE"
-      - name: issue comment
-        id: another_comment
-        uses: ./
-        with: 
-          repo-token: ${{ secrets.GITHUB_TOKEN}}
-          message: >
-            ==================================================
-            testttt
-            ==================================================
-      - name: log action output
-        run: echo ${{steps.run_action.outputs.message}}
       - name: Missed Link to a GitHub repository
         if: contains(github.event.issue.body, 'Link to a GitHub repository') == false
         env:
@@ -62,23 +52,14 @@ jobs:
         env:
           OS_VERSION: OS version
         run: echo "$OS_VERSION"
-      - uses: actions/checkout@v2.0.0 
+      - name: issue comment
+        id: issue_comment
+        uses: ./
+        with: 
+          repo-token: ${{ secrets.GITHUB_TOKEN}}
+          message: >
+            ==================================================
+            testttt
+            ==================================================
       - name: log action output
         run: echo ${{steps.run_action.outputs.message}}
-  default-comment:
-    runs-on: ubuntu-latest
-    needs: [triage]
-    steps:
-    - uses: actions/checkout@v2.0.0 
-    - name: issue comment
-      if: ${{contains(github.event.issue.labels.*.name, 'more information required') == false}}
-      id: issue_comment
-      uses: ./
-      with: 
-        repo-token: ${{ secrets.GITHUB_TOKEN}}
-        message: >
-          Thank you for filing this issue.  We appreciate your feedback and will review the issue as soon as possible. 
-          Remember, however, that GitHub isn't a mechanism for receiving support under any agreement or SLA. 
-          If you require immediate assistance, contact Salesforce Customer Support.
-    - name: log action output
-      run: echo ${{steps.run_action.outputs.message}}
