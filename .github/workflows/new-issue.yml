@@ -16,9 +16,11 @@ jobs:
     needs: [triage]
     steps:
       - name: Missed Steps to reproduce
+        id: steps_to_reproduce
         env:
           #if: ${{contains(github.event.issue.body, 'Steps to reproduce') == false}}
           STEPS_REPRODUCE: Steps to reproduce
+      - name: Comment
         if: ${{contains(github.event.issue.labels.*.name, 'more information required') == true}}
         id: issue_comment
         uses: ./
@@ -29,7 +31,11 @@ jobs:
             Check this ${{env}}
             Check this1 ${{env.STEPS_REPRODUCE}}
             Check this2 ${{steps.env.STEPS_REPRODUCE}}
-            Check this3 ${{contains(github.event.issue.labels.*.name, 'more information required') ? "Hola TRUE" : "Hola FALSE"}}
+            Check this3 ${{steps.steps_to_reproduce}}
+            Check this4 ${{steps.steps_to_reproduce.env}}
+            Check this5 ${{steps.steps_to_reproduce.env.STEPS_REPRODUCE}}
+            Check this6 ${{steps.steps_to_reproduce.outputs}}
+            Check this6 ${{steps.steps_to_reproduce.outputs.run}}
             ===============================
       - name: Missed Link to a GitHub repository
         if: contains(github.event.issue.body, 'Link to a GitHub repository') == false
