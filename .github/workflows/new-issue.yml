@@ -59,10 +59,8 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN}}
           message: >
             ==================================================
-            Check this1 ${{steps.steps_to_reproduce}}
-            Check this2 ${{steps.steps_to_reproduce.outputs}}
-            Check this3 ${{steps.steps_to_reproduce.env}}
-            Check this4 ${{steps.steps_to_reproduce.env.STEPS_REPRODUCE}}
+            Check this1 ${{toJson(steps.steps_to_reproduce)}}
+            Check this2 ${{toJson(steps.steps_to_reproduce.outputs)}}
             ==================================================
       - name: log action output
         run: echo ${{steps.run_action.outputs.message}}
