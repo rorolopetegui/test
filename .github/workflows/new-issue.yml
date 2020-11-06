@@ -27,7 +27,7 @@ jobs:
         run: echo "::set-output name=test::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
       - name: Missed Link to a GitHub repository
         id: link_to_github
-        if: contains(github.event.issue.body, 'Link to a GitHub repository') == false
+        if: contains(github.event.issue.body, 'Link to a GitHub repository') == true
         env:
           LINK_TO_GITHUB: Link to a GitHub repository
         run: echo "::set-output name=matrix::{\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}"
