@@ -59,14 +59,10 @@ jobs:
           repo-token: ${{ secrets.GITHUB_TOKEN}}
           message: >
             ==================================================
-            Check this ${{env}}
-            Check this1 ${{env.STEPS_REPRODUCE}}
-            Check this2 ${{steps.env.STEPS_REPRODUCE}}
-            Check this3 ${{steps.steps_to_reproduce}}
-            Check this4 ${{steps.steps_to_reproduce.env}}
-            Check this5 ${{steps.steps_to_reproduce.env.STEPS_REPRODUCE}}
-            Check this6 ${{steps.steps_to_reproduce.outputs}}
-            Check this6 ${{steps.steps_to_reproduce.outputs.run}}
+            Check this1 ${{steps.steps_to_reproduce}}
+            Check this2 ${{steps.steps_to_reproduce.outputs}}
+            Check this3 ${{steps.steps_to_reproduce.env}}
+            Check this4 ${{steps.steps_to_reproduce.env.STEPS_REPRODUCE}}
             ==================================================
       - name: log action output
         run: echo ${{steps.run_action.outputs.message}}
