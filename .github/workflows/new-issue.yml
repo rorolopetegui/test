@@ -29,6 +29,7 @@ jobs:
             Check this ${{env}}
             Check this1 ${{env.STEPS_REPRODUCE}}
             Check this2 ${{steps.env.STEPS_REPRODUCE}}
+            Check this3 ${{contains(github.event.issue.labels.*.name, 'more information required') ? "Hola TRUE" : "Hola FALSE"}}
             ===============================
       - name: Missed Link to a GitHub repository
         if: contains(github.event.issue.body, 'Link to a GitHub repository') == false
