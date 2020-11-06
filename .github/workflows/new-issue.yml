@@ -20,6 +20,7 @@ jobs:
         env:
           #if: ${{contains(github.event.issue.body, 'Steps to reproduce') == false}}
           STEPS_REPRODUCE: Steps to reproduce
+        run: echo "$STEPS_REPRODUCE"
       - name: Comment
         if: ${{contains(github.event.issue.labels.*.name, 'more information required') == true}}
         id: issue_comment
