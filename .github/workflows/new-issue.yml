@@ -16,7 +16,7 @@ jobs:
     needs: [triage]
     outputs:
       STEPS_REPRODUCE: ${{ steps.steps_to_reproduce.outputs.STEPS_REPRODUCE }}
-      LINK_TO_GITHUB: ${{ steps.steps_to_reproduce.outputs.LINK_TO_GITHUB }}
+      LINK_TO_GITHUB: ${{ steps.link_to_github.outputs.LINK_TO_GITHUB }}
     steps:
       - uses: actions/checkout@v2.0.0 
       - name: Missed Steps to reproduce
