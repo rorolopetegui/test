@@ -77,6 +77,6 @@ jobs:
         with: 
           repo-token: ${{ secrets.GITHUB_TOKEN}}
           message: >
-            ${{format('{{Your issue is missing this required information: {0} {1} {2}. When you provide us this information we'll triage and reproduce the issue.}}', needs.missed-info.outputs.STEPS_REPRODUCE, needs.missed-info.outputs.LINK_TO_GITHUB, needs.missed-info.outputs.EXPECTED_RESULT, needs.missed-info.outputs.ACTUAL_RESULT)}}
+            ${{format('{{Your issue is missing this required information: {0} {1} {2}. When you provide us this information we''ll triage and reproduce the issue.}}', needs.missed-info.outputs.STEPS_REPRODUCE, needs.missed-info.outputs.LINK_TO_GITHUB, needs.missed-info.outputs.EXPECTED_RESULT, needs.missed-info.outputs.ACTUAL_RESULT)}}
       - name: log action output
         run: echo ${{steps.run_action.outputs.message}}
