@@ -86,6 +86,7 @@ jobs:
         with: 
           repo-token: ${{ secrets.GITHUB_TOKEN}}
           message: >
+            Check this${{toJson(github.event.issue.labels)}}
             Thank you for filing this issue.  We appreciate your feedback and will review the issue as soon as possible. 
             Remember, however, that GitHub isn't a mechanism for receiving support under any agreement or SLA. 
             If you require immediate assistance, contact Salesforce Customer Support.
