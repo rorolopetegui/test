@@ -79,7 +79,9 @@ jobs:
           message: >
             ==================================================
             Check this ${{toJson(needs.missed-info.outputs)}}
-            Check this1 ${{format('{{Hello {0} {1} {2} {3}!}}', needs.missed-info.outputs.STEPS_REPRODUCE, needs.missed-info.outputs.LINK_TO_GITHUB, needs.missed-info.outputs.EXPECTED_RESULT, needs.missed-info.outputs.ACTUAL_RESULT)}}
+            Check this1 ${{format('{{Your issue is missing this required information: {0} {1} {2} {3} {4} {5} {6}. When you provide us this information we'll triage and reproduce the issue.}}', 
+            needs.missed-info.outputs.STEPS_REPRODUCE, needs.missed-info.outputs.LINK_TO_GITHUB, needs.missed-info.outputs.EXPECTED_RESULT, needs.missed-info.outputs.ACTUAL_RESULT,
+            needs.missed-info.outputs.CLI_VERSION, needs.missed-info.outputs.PLUGIN_VERSION, needs.missed-info.outputs.OS_VERSION)}}
             ==================================================
       - name: log action output
         run: echo ${{steps.run_action.outputs.message}}
