@@ -32,7 +32,7 @@ jobs:
         run: echo "::set-output name=STEPS_REPRODUCE::$STEPS_REPRODUCE"
       - name: Missed Link to a GitHub repository
         id: link_to_github
-        if: contains(github.event.issue.body, 'Link to a GitHub repository') == false
+        if: contains(github.event.issue.body, 'Repository to reproduce') == false
         env:
           LINK_TO_GITHUB: Link to a GitHub repository
         run: echo "::set-output name=LINK_TO_GITHUB::$LINK_TO_GITHUB"
@@ -50,13 +50,13 @@ jobs:
         run: echo "::set-output name=ACTUAL_RESULT::$ACTUAL_RESULT"
       - name: Missed CLI version
         id: missed_cli_version
-        if: contains(github.event.issue.body, 'CLI version') == false
+        if: contains(github.event.issue.body, 'CLI Version') == false
         env:
           CLI_VERSION: CLI version
         run: echo "::set-output name=CLI_VERSION::$CLI_VERSION"
       - name: Missed plugin version
         id: missed_plugin_version
-        if: contains(github.event.issue.body, 'plugin version') == false
+        if: contains(github.event.issue.body, 'plugin Version') == false
         env:
           PLUGIN_VERSION: Plugin version
         run: echo "::set-output name=PLUGIN_VERSION::$PLUGIN_VERSION"
