@@ -28,7 +28,7 @@ jobs:
 
     - name: log action output
       run: echo ${{steps.run_action.outputs.message}}     
-  other-thing:
+  missed-information:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2.0.0 
