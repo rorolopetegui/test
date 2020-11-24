@@ -20,7 +20,7 @@ jobs:
       uses: ./
       with: 
         repo-token: ${{ secrets.GITHUB_TOKEN}}
-        label: 'owned by another team'
+        label: 'bug'
         message: >
           We have determined that the issue you reported exists in code owned by another team that uses only the official support channels.
           To ensure that your issue is addressed, open an official Salesforce customer support ticket with a link to this issue.
