@@ -53,7 +53,7 @@ jobs:
       uses: ./
       with: 
         repo-token: ${{ secrets.GITHUB_TOKEN}}
-        label: 'bug'
+        label: 'feature'
         message: >
           Thank you for proposing this new feature
     - name: log action output
